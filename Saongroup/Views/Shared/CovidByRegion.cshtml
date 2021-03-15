@@ -1,0 +1,28 @@
+﻿@model Saongroup.ViewModels.DataCovidViewModel
+
+<div class="row col-md-12">
+    <h3>Country: @ViewData["SelectedCountry"]</h3>
+</div>
+<div>
+    <table id="CovidByRegion" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Province</th>
+                <th>Cases</th>
+                <th>Deaths</th>
+            </tr>
+        </thead>
+        @if (Model.ListData != null)
+        {
+           foreach (var data in Model.ListData)
+            {
+                <tr>
+                    <td>@data.region.province</td>
+                    <td>@data.confirmed</td>
+                    <td>@data.deaths</td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+

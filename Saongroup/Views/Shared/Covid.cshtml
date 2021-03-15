@@ -1,0 +1,25 @@
+﻿@model Saongroup.ViewModels.DataCovidViewModel
+
+<div>
+    <table id="Covid" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Country</th>
+                <th>Cases</th>
+                <th>Deaths</th>
+            </tr>
+        </thead>
+        @if (Model.ListData != null)
+        {
+            foreach (var data in Model.ListData)
+            {
+                <tr>
+                    <td>@data.region.name</td>
+                    <td>@data.confirmed</td>
+                    <td>@data.deaths</td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
