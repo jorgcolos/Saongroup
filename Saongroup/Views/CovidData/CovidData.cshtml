@@ -1,0 +1,60 @@
+﻿@model Saongroup.ViewModels.DataCovidViewModel
+@{
+    ViewBag.Title = "CovidData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container">
+        <div class="row col-md-12">
+            @if (@ViewData["SelectedCountry"] == null)
+            {
+                <h2>TOP 10 COVID CASES </h2>
+
+            }
+            else
+            {
+                <h2>TOP 10 COVID CASES BY REGION </h2>
+            }
+            <br />
+        </div>
+        <div class="row col-md-12">
+            @using (Html.BeginForm("CovidData", "CovidData", FormMethod.Post))
+            {
+                <div class="col-md-3">
+                    @Html.DropDownList("Countries", Model.GetCountriesListItems(), "Select a country")
+
+                    @*@Html.DropDownList("Countries")*@
+                    @* @Html.DropDownList("ddlCountries", Model.GetCountriesListItems(), "Select a country", new { @onchange = "this.form.submit();" }) *@
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Report" id="btnReport" name="btnReport" class="btn btn-primary" />
+                </div>
+                <div class="col-md-1">
+                </div>
+            }
+        <div class="col-md-6">
+            
+           @using (Html.BeginForm("Export", "CovidData", FormMethod.Post))
+            {
+                <input type="submit" value="XML" id="btnXml" name="export" class="btn btn-primary" />
+                <input type="submit" value="JSON" id="btnJson" name="export" class="btn btn-primary" />
+                <input type="submit" value="CSV" id="btnCsv" name="export" class="btn btn-primary" />
+            }
+            </div>
+        </div>
+        <div class="row col-md-12" style="margin-bottom:20px">
+        </div>
+
+       @if (@ViewData["SelectedCountry"] == null)
+        {
+            <div class="row col-md-12">
+                @{ Html.RenderPartial("Covid", Model.Data);}
+            </div>
+        }
+        else
+        {
+            <div class="row col-md-12">
+                @{ Html.RenderPartial("CovidByRegion", Model.Data);}
+            </div>
+        }
+    </div>
